@@ -1,0 +1,53 @@
+<head>
+    <meta charset="utf-8">
+    <title>FarmTaste</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+<body>
+<!--<div id="side">-->
+<input type="checkbox" id="check">
+<!--header area start-->
+<header>
+    <!--  <div class="header">-->
+    <label for="check">
+        <i class="fas fa-bars" id="sidebar_btn"></i>
+    </label>
+    <div class="left_area">
+        <h3>Farm <span>Taste</span></h3>
+    </div>
+    <div class="right_area">
+        <a (click)="logout()" class="logout_btn">Logout</a>
+    </div>
+    <!--  </div>-->
+</header>
+<!--header area end-->
+<!--sidebar start-->
+<div class="body">
+    <div class="sidebar">
+        <div style="text-align: center;">
+            <img src="../../../assets/1.png" class="profile_image" alt="">
+            <!--      <span routerLink="/dashboard/inspections" routerLinkActive="active-link">Inspections</span>-->
+            <h4>Admin</h4>
+        </div>
+        <a id="dashboard" routerLink="/admin-home" routerLinkActive="active" (click)="dashboard()"><i
+                class="fas fa-desktop"></i><span>Dashboard</span></a>
+        <a id="products" routerLink="/products" routerLinkActive="active" (click)="products()"><i
+                class="fas fa-shopping-bag"></i><span>Products</span></a>
+        <a id="users" routerLink="/users" routerLinkActive="active" (click)="users()"><i
+                class="fas fa-user-alt"></i><span>Users</span></a>
+        <a routerLink="/employees" routerLinkActive="active" (click)="employees()"><i
+                class="fas fa-briefcase"></i><span>Employees</span></a>
+        <a routerLink="/subscription" routerLinkActive="active" (click)="subscriptions()"><i
+                class="fas fa-clock"></i><span>Subscription</span></a>
+        <a routerLink="/history" routerLinkActive="active" (click)="histories()"><i
+                class="fas fa-undo"></i><span>History</span></a>
+        <a><i class="fas fa-sliders-h"></i><span>Settings</span></a>
+    </div>
+</div>
+<!--</div>-->
+<!---->
+<!--<mat-sidenav-container class="sidenav-container">-->
+<!--  <mat-sidenav #leftSidenav mode="side" opened>-->
+<!--    <app-left-menu></app-left-menu>-->
+<!--  </mat-sidenav>-->
+</body>

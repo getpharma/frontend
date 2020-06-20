@@ -1,0 +1,27 @@
+<!--
+Author: Subhanshu Chaddha
+Contact: subhanshu.chaddha2@gmail.com
+College: AKGEC, Ghaziabad
+-->
+<title>Login</title>
+
+<div class="container">
+  <div class="head">
+<!--    <img src="../../../assets/images/CsiLogo.png" alt="CSI">-->
+    <h1>Farm taste</h1>
+  </div>
+
+  <form class="form" action="">
+    <label>
+      <input matInput type="emailOrPhone" [formControl]="controls.emailOrPhone" placeholder="EmailOrPhone"/>
+    </label>
+    <hr>
+    <label>
+      <input type="password" placeholder="Password" [formControl]="controls.password" matInput/>
+    </label>
+    <hr>
+    <input class="submit" type="submit" value="Login" (click)="login()">
+  </form>
+
+
+</div>
