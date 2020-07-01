@@ -1,0 +1,89 @@
+<app-dashboard></app-dashboard>
+<div id="content">
+  <h2>
+    <span class="heading inactive-heading" id="head-pack" (click)="underline('head-pack');">Packagers</span> |
+    <span class="heading inactive-heading" id="head-del" (click)="underline('head-del');">  Delivery Man</span>
+  </h2>
+  <div id="table-pack">
+    <div class="fixed">
+      <div class="add-button">
+        <mat-card class="card add" (click)="createEmployee()">
+          <mat-card-title>Add Employee</mat-card-title>
+        </mat-card>
+      </div>
+      <h2>List Of Packagers</h2>
+    </div>
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile No</th>
+          <th>Aadhaar No</th>
+          <th>Driver License</th>
+          <th>Address</th>
+          <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-rows" *ngFor="let retailer of packagers; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{retailer.name}}</td>
+          <td>{{retailer.email}}</td>
+          <td>{{retailer.mobile_no}}</td>
+          <td>{{retailer.aadhaar_no}}</td>
+          <td>{{retailer.driver_license}}</td>
+          <td style="max-width: 100px; overflow: auto">{{retailer.address}}</td>
+          <td>
+            <span class="fas fa-edit" (click)="updateEmployee(retailer, i)"></span>
+            <span class="fas fa-trash" (click)="delete('employee', retailer.id)"></span>
+          </td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div id="table-del">
+    <div class="fixed">
+      <div class="add-button">
+        <mat-card class="card add" (click)="createEmployee()">
+          <mat-card-title>Add Employee</mat-card-title>
+        </mat-card>
+      </div>
+      <h2>List Of Delivery Men</h2>
+    </div>
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile No</th>
+          <th>Aadhaar No</th>
+          <th>Driver License</th>
+          <th>Address</th>
+          <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-rows" *ngFor="let retailer of deliveryMan; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{retailer.name}}</td>
+          <td>{{retailer.email}}</td>
+          <td>{{retailer.mobile_no}}</td>
+          <td>{{retailer.aadhaar_no}}</td>
+          <td>{{retailer.driver_license}}</td>
+          <td style="max-width: 100px; overflow: auto">{{retailer.address}}</td>
+          <td>
+            <span class="fas fa-edit" (click)="updateEmployee(retailer, i)"></span>
+            <span class="fas fa-trash" (click)="delete('employee', retailer.id)"></span>
+          </td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+mat-radio-group {
+  color: grey;
+}
+mat-radio-button {
+  margin: 10px;
+}
+#form {
+  height: 600px;
+}
+mat-radio-group {
+  /*padding: 20px;*/
+}
+.list {
+  overflow-y: scroll;
+  max-height: 600px;
+
+}
+
+.mat-card {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+}
+
+button {
+  /*display: inline-block;*/
+  float: right;
+  margin-top: 20px;
+  padding: 5px;
+}

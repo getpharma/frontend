@@ -35,11 +35,6 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  dashboard() {
-    // this.bgColor('dashboard');
-    this.router.navigate(['/admin-home']);
-  }
-
   products() {
     // this.bgColor('products');
     this.router.navigate(['/products']);
@@ -54,11 +49,16 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/employees']);
   }
 
+  orders() {
+    this.router.navigate(['/orders']);
+  }
+
+  pickups() {
+    this.router.navigate(['/pickups']);
+  }
+
   histories() {
     this.router.navigate(['/history']);
   }
 
-  subscriptions() {
-    this.router.navigate(['/subscription']);
-  }
 }

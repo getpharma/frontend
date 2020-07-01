@@ -1,0 +1,160 @@
+<app-dashboard></app-dashboard>
+<div id="content">
+  <h2>
+    <span class="heading inactive-heading" id="head-unass-ord" (click)="underline('head-unass-ord');">Unassigned</span> |
+    <span class="heading inactive-heading" id="head-pend-ord" (click)="underline('head-pend-ord');">  Pending</span> |
+    <span class="heading inactive-heading" id="head-pack-ord" (click)="underline('head-pack-ord');">  Packed</span> |
+    <span class="heading inactive-heading" id="head-comp-ord" (click)="underline('head-comp-ord');">  Completed</span>
+  </h2>
+  <br>
+  <table id="days">
+    <tr>
+      <th class="day inactive-day" id="all" (click)="selectDay(orderType, 'all')">All</th>
+      <th class="day inactive-day" id="monday" (click)="selectDay(orderType, 'monday')">Monday</th>
+      <th class="day inactive-day" id="tuesday" (click)="selectDay(orderType, 'tuesday')">Tuesday</th>
+      <th class="day inactive-day" id="wednesday" (click)="selectDay(orderType, 'wednesday')">Wednesday</th>
+      <th class="day inactive-day" id="thursday" (click)="selectDay(orderType, 'thursday')">Thursday</th>
+      <th class="day inactive-day" id="friday" (click)="selectDay(orderType, 'friday')">Friday</th>
+      <th class="day inactive-day" id="saturday" (click)="selectDay(orderType, 'saturday')">Saturday</th>
+      <th class="day inactive-day" id="sunday" (click)="selectDay(orderType, 'sunday')">Sunday</th>
+    </tr>
+  </table>
+  <table id="filter">
+    <tr>
+      <th class="day inactive-day" id="today" (click)="historyFilter('today')">Today</th>
+      <th class="day inactive-day" id="yesterday" (click)="historyFilter('yesterday')">Yesterday</th>
+      <th class="day inactive-day" id="previous" (click)="historyFilter('previous')">Previous</th>
+    </tr>
+  </table>
+  <br>
+  <div id="table-unass-ord">
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>Order Id</th>
+          <th>Retailer</th>
+          <th>Store</th>
+          <th>Address</th>
+          <th>Products</th>
+          <th>Amount</th>
+          <th>Delivery Date</th>
+          <th>Employees</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let order of unassignedOrders; let i = index">
+          <td>{{order.order_id}}</td>
+          <td>{{order.user.name}}</td>
+          <td>{{order.user.store_name}}</td>
+          <td style="max-width: 100px; overflow: auto">{{order.delivery_address}}</td>
+          <td>{{order.products.length}}</td>
+          <td>{{order.amount}}</td>
+          <td>{{order.expected_date}}</td>
+          <td><a id="assign-button" (click)="assign(order.id)">Assign</a></td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div id="table-pend-ord">
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>Order Id</th>
+          <th>Retailer</th>
+          <th>Store</th>
+          <th>Address</th>
+          <th>Products</th>
+          <th>Amount</th>
+          <th>Delivery Date</th>
+          <th>Packager</th>
+          <th>Delivery Man</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let order of pendingOrders; let i = index">
+          <td>{{order.order_id}}</td>
+          <td>{{order.user.name}}</td>
+          <td>{{order.user.store_name}}</td>
+          <td style="max-width: 100px; overflow: auto">{{order.delivery_address}}</td>
+          <td>{{order.products.length}}</td>
+          <td>{{order.amount}}</td>
+          <td>{{order.expected_date}}</td>
+          <td *ngIf="order.packager_id; else packager">{{order.packager.name}}</td>
+          <ng-template #packager>{{order.packager_id}}</ng-template>
+          <td *ngIf="order.delivery_man_id; else delivery_man">{{order.delivery_man.name}}</td>
+          <ng-template #delivery_man>{{order.delivery_man_id}}</ng-template>
+
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div id="table-pack-ord">
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>Order Id</th>
+          <th>Retailer</th>
+          <th>Store</th>
+          <th>Address</th>
+          <th>Delivery Date</th>
+          <th>Packager</th>
+          <th>Delivery Man</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let order of packedOrders; let i = index">
+          <td>{{order.order_id}}</td>
+          <td>{{order.user.name}}</td>
+          <td>{{order.user.store_name}}</td>
+          <td style="max-width: 100px; overflow: auto">{{order.delivery_address}}</td>
+          <td>{{order.expected_date}}</td>
+          <td *ngIf="order.packager_id; else packager">{{order.packager.name}}</td>
+          <ng-template #packager>{{order.packager_id}}</ng-template>
+          <td *ngIf="order.delivery_man_id; else delivery_man">{{order.delivery_man.name}}</td>
+          <ng-template #delivery_man>{{order.delivery_man_id}}</ng-template>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div id="table-comp-ord">
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>Order Id</th>
+          <th>Retailer</th>
+          <th>Store</th>
+          <th>Address</th>
+          <th>Delivery Date</th>
+          <th>Packager</th>
+          <th>Delivery Man</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let order of completedOrders; let i = index">
+          <td>{{order.order_id}}</td>
+          <td>{{order.user.name}}</td>
+          <td>{{order.user.store_name}}</td>
+          <td style="max-width: 100px; overflow: auto">{{order.delivery_address}}</td>
+          <td>{{order.delivery_date}}</td>
+          <td>{{order.packager}}</td>
+          <td>{{order.delivery_man}}</td>
+          <td *ngIf="order.order_status === 'delivered'; else redBg"><a id="delivered">{{order.order_status}}</a></td>
+          <ng-template #redBg><td><a id="undelivered">{{order.order_status}}</a></td></ng-template>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

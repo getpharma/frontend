@@ -1,8 +1,8 @@
-import {Employee} from './employee';
-import {User} from './user';
-import {OrderStatus} from '../enums/order-status.enum';
-import {PaymentStatus} from '../enums/payment-status.enum';
-import {CompactProduct} from './compact-product';
+import { Employee } from './employee';
+import { User } from './user';
+import { OrderStatus } from '../enums/order-status.enum';
+import { PaymentStatus } from '../enums/payment-status.enum';
+import { CompactProduct } from './compact-product';
 
 export interface History {
   id: number;
@@ -12,11 +12,14 @@ export interface History {
   amount: number;
   delivery_charge: number;
   delivery_address: string;
-  employee_id?: number;
+  delivery_man_id?: number;
+  delivery_man?: string;
+  packager_id?: number;
+  packager?: string;
   payment_status: PaymentStatus;
   order_status: OrderStatus;
   delivery_date?: Date;
   invoice_url?: string;
+  created_at: Date;
   user: User;
-  employee: Employee;
 }

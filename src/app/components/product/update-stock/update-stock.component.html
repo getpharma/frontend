@@ -1,0 +1,14 @@
+<div id="form">
+  <mat-card style="width: 50vh; text-align: center; padding: 30px">
+    <form [formGroup]="form" (ngSubmit)="updateStock()">
+      <mat-form-field>
+        <label for="no_of_units">
+          <input matInput type="text" class="form-control" id="no_of_units" placeholder="Quantity - {{stock.no_of_units}}"
+                 formControlName="no_of_units">
+        </label>
+      </mat-form-field>      <br>
+      <button mat-raised-button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Submit <i
+          class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    </form>
+  </mat-card>
+</div>

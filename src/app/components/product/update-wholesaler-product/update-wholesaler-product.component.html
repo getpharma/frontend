@@ -1,0 +1,23 @@
+<div id="form">
+  <mat-card style="width: 50vh; text-align: center; padding: 30px">
+    <form [formGroup]="form" (ngSubmit)="updateWholesalerProduct()">
+      <mat-form-field>
+        <label for="deal_price">
+          <input matInput type="text" class="form-control" id="deal_price"
+                 placeholder="Deal Price - {{wholesalerProduct.deal_price}}" formControlName="deal_price">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="selling_price">
+          <input matInput type="text" class="form-control" id="selling_price"
+                 placeholder="Selling Price - {{wholesalerProduct.product.selling_price}}"
+                 formControlName="selling_price">
+        </label>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Submit <i
+          class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    </form>
+  </mat-card>
+</div>

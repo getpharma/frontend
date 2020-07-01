@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.adminService.login(data)
       .subscribe(res => {
         localStorage.setItem('auth_token', res.token);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/products']);
       }, error1 => {
         alert(this.errorMessage);
       });

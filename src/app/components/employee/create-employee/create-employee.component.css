@@ -1,0 +1,9 @@
+mat-radio-group {
+  color: grey;
+}
+mat-radio-button {
+  margin: 10px;
+}
+#form {
+  height: 600px;
+}

@@ -24,12 +24,68 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CreateCategoryComponent } from './components/product/create-category/create-category.component';
+import { CreateProductComponent } from './components/product/create-product/create-product.component';
+import { UpdateProductComponent } from './components/product/update-product/update-product.component';
+import { ConfirmationDialogComponent } from './components/product/confirmation-dialog/confirmation-dialog.component';
+import { ProductService } from './services/product.service';
+import { ProductComponent } from './components/product/product.component';
+import { UpdateCategoryComponent } from './components/product/update-category/update-category.component';
+import { CreateWholesalerProductComponent } from './components/product/create-wholesaler-product/create-wholesaler-product.component';
+import { UpdateWholesalerProductComponent } from './components/product/update-wholesaler-product/update-wholesaler-product.component';
+import { WholesalerService } from './services/wholesaler.service';
+import { UserComponent } from './components/user/user.component';
+import { UserService } from './services/user.service';
+import { CreateRetailerComponent } from './components/user/create-retailer/create-retailer.component';
+import { UpdateRetailerComponent } from './components/user/update-retailer/update-retailer.component';
+import { CreateWholesalerComponent } from './components/user/create-wholesaler/create-wholesaler.component';
+import { UpdateWholesalerComponent } from './components/user/update-wholesaler/update-wholesaler.component';
+import { EmployeeComponent } from './components/employee/employee.component';
+import { CreateEmployeeComponent } from './components/employee/create-employee/create-employee.component';
+import { UpdateEmployeeComponent } from './components/employee/update-employee/update-employee.component';
+import { EmployeeService } from './services/employee.service';
+import { OrderComponent } from './components/order/order.component';
+import { OrderService } from './services/order.service';
+import { AssignEmployeesComponent } from './components/order/assign-employees/assign-employees.component';
+import { PickupComponent } from './components/pickup/pickup.component';
+import { PickupService } from './services/pickup.service';
+import { ModRateConfirmationDialogComponent } from './components/pickup/mod-rate-confirmation-dialog/mod-rate-confirmation-dialog.component';
+import { AssignWholesalerComponent } from './components/pickup/assign-wholesaler/assign-wholesaler.component';
+import { WholesalerConfirmationDialogComponent } from './components/pickup/wholesaler-confirmation-dialog/wholesaler-confirmation-dialog.component';
+import { AssignPackagerComponent } from './components/pickup/assign-packager/assign-packager.component';
+import { CreateStockComponent } from './components/product/create-stock/create-stock.component';
+import { UpdateStockComponent } from './components/product/update-stock/update-stock.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    ProductComponent,
+    CreateCategoryComponent,
+    CreateProductComponent,
+    UpdateProductComponent,
+    ConfirmationDialogComponent,
+    UpdateCategoryComponent,
+    CreateWholesalerProductComponent,
+    UpdateWholesalerProductComponent,
+    UserComponent,
+    CreateRetailerComponent,
+    UpdateRetailerComponent,
+    CreateWholesalerComponent,
+    UpdateWholesalerComponent,
+    EmployeeComponent,
+    CreateEmployeeComponent,
+    UpdateEmployeeComponent,
+    OrderComponent,
+    AssignEmployeesComponent,
+    PickupComponent,
+    ModRateConfirmationDialogComponent,
+    AssignWholesalerComponent,
+    WholesalerConfirmationDialogComponent,
+    AssignPackagerComponent,
+    CreateStockComponent,
+    UpdateStockComponent
   ],
   imports     : [
     BrowserModule,
@@ -55,7 +111,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
   ],
   providers   : [
     ApiService,
-    AdminService
+    AdminService,
+    ProductService,
+    WholesalerService,
+    UserService,
+    EmployeeService,
+    OrderService,
+    PickupService
   ],
   bootstrap   : [AppComponent]
 })

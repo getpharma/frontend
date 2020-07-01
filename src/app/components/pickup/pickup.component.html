@@ -1,0 +1,235 @@
+<app-dashboard></app-dashboard>
+<div id="content">
+  <h2>
+    <span class="heading inactive-heading" id="head-unass-pick" (click)="underline('head-unass-pick');">Unassigned</span> |
+    <span class="heading inactive-heading" id="head-pend-pick" (click)="underline('head-pend-pick');">  Pending</span> |
+    <span class="heading inactive-heading" id="head-acc-pick" (click)="underline('head-acc-pick');">  Accepted</span> |
+    <span class="heading inactive-heading" id="head-comp-pick" (click)="underline('head-comp-pick');">  Pickups</span> |
+    <span class="heading inactive-heading" id="head-rej-pick" (click)="underline('head-rej-pick');">  Rejected</span> |
+    <span class="heading inactive-heading" id="head-mod-pick" (click)="underline('head-mod-pick');">  Modified Rates</span>
+  </h2>
+  <br>
+  <table id="days">
+    <tr>
+      <th class="day inactive-day" id="all" (click)="selectDay(orderType, 'all')">All</th>
+      <th class="day inactive-day" id="monday" (click)="selectDay(orderType, 'monday')">Monday</th>
+      <th class="day inactive-day" id="tuesday" (click)="selectDay(orderType, 'tuesday')">Tuesday</th>
+      <th class="day inactive-day" id="wednesday" (click)="selectDay(orderType, 'wednesday')">Wednesday</th>
+      <th class="day inactive-day" id="thursday" (click)="selectDay(orderType, 'thursday')">Thursday</th>
+      <th class="day inactive-day" id="friday" (click)="selectDay(orderType, 'friday')">Friday</th>
+      <th class="day inactive-day" id="saturday" (click)="selectDay(orderType, 'saturday')">Saturday</th>
+      <th class="day inactive-day" id="sunday" (click)="selectDay(orderType, 'sunday')">Sunday</th>
+      <div *ngIf="orderType === 'unass'" class="assign-button top" (click)="assignWholesalerByDay(currentDay)">
+        Assign {{currentDay}} Pickups
+      </div>
+
+    </tr>
+
+  </table>
+  <div id="table-unass-pick">
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Product</th>
+          <th>Manufacturer</th>
+          <th>Pack Size</th>
+          <th>Required Quantity</th>
+          <th>Delivery Date</th>
+          <th>Wholesaler</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let order of unassignedPickupProducts; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{order.product.title}}</td>
+          <td>{{order.product.manufacturer}}</td>
+          <td>{{order.product.pack_size}}</td>
+          <td>{{order.required_quantity}}</td>
+          <td><b>{{order.delivery_date}}</b></td>
+          <td><a class="assign-button" (click)="assignWholesaler(order.id, order.product_id)">Assign</a></td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div id="table-pend-pick">
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Product</th>
+          <th>Manufacturer</th>
+          <th>Pack Size</th>
+          <th>Required Quantity</th>
+          <th>Delivery Date</th>
+          <th>Wholesaler</th>
+          <th>Deal Rate</th>
+          <th>Total Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let order of pendingPickupProducts; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{order.product.title}}</td>
+          <td>{{order.product.manufacturer}}</td>
+          <td>{{order.product.pack_size}}</td>
+          <td>{{order.required_quantity}}</td>
+          <td><b>{{order.delivery_date}}</b></td>
+          <td>{{order.wholesalerProduct.wholesaler.name}}</td>
+          <td>{{order.wholesalerProduct.deal_price}}</td>
+          <td>{{order.amount}}</td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div id="table-acc-pick">
+    <div class="table-wrapper existing">
+      <div *ngFor="let pickup of acceptedPickups">
+        <div class="top-head">
+          <div class="sub-heading">
+            <span>Pickup Id: {{pickup.pickup_id}}</span><span> | </span>
+            <span>Wholesaler: {{pickup.wholesaler.name}} ({{pickup.wholesaler.store_name}})</span><span> | </span>
+            <span>Total Amount: {{pickup.amount}}</span><span> | </span>
+            <span *ngIf="pickup.employee_id; else assignEmp">Pickup Boy: {{pickup.employee_name}}</span>
+            <ng-template #assignEmp><span>Pickup Boy: <span class="assign-button"
+                                                            (click)="assignPackagerToPickup(pickup.id)">Assign</span></span>
+            </ng-template>
+          </div>
+        </div>
+        <table class="fl-table">
+          <thead>
+          <tr>
+            <th>S.No.</th>
+            <th>Product</th>
+            <th>Required Quantity</th>
+            <th>Deal Rate</th>
+            <th>Total Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr class="table-rows" *ngFor="let order of pickup.products; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{order.title}}</td>
+            <td>{{order.no_of_units}}</td>
+            <td>{{order.rate}}</td>
+            <td>{{order.amount}}</td>
+          </tr>
+          <tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="table-comp-pick">
+    <div class="table-wrapper existing">
+      <div *ngFor="let pickup of completedPickups">
+        <div class="top-head">
+          <div class="sub-heading">
+            <span>Pickup Id: {{pickup.pickup_id}}</span><span> | </span>
+            <span>Wholesaler: {{pickup.wholesaler.name}} ({{pickup.wholesaler.store_name}})</span><span> | </span>
+            <span>Picked Up On: {{pickup.pickup_date}}</span><span> | </span>
+            <span>Total Amount: {{pickup.amount}}</span><span> | </span>
+            <span *ngIf="pickup.employee_id; else assignEmp">Pickup Boy: {{pickup.employee_name}}</span>
+            <ng-template #assignEmp><span>Pickup Boy: <span class="assign-button">Assign</span></span></ng-template>
+          </div>
+        </div>
+        <table class="fl-table">
+          <thead>
+          <tr>
+            <th>S.No.</th>
+            <th>Product</th>
+            <th>Required Quantity</th>
+            <th>Deal Rate</th>
+            <th>Total Amount</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          <tr class="table-rows" *ngFor="let order of pickup.products; let i = index">
+            <td>{{i + 1}}</td>
+            <td>{{order.title}}</td>
+            <td>{{order.no_of_units}}</td>
+            <td>{{order.rate}}</td>
+            <td>{{order.amount}}</td>
+          </tr>
+          <tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="table-rej-pick">
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Product</th>
+          <th>Manufacturer</th>
+          <th>Pack Size</th>
+          <th>Required Quantity</th>
+          <th>Delivery Date</th>
+          <th>Previous Wholesaler</th>
+          <th>Previous Deal Rate</th>
+          <th>New Wholesaler</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let order of rejectedPickupProducts; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{order.product.title}}</td>
+          <td>{{order.product.manufacturer}}</td>
+          <td>{{order.product.pack_size}}</td>
+          <td>{{order.required_quantity}}</td>
+          <td><b>{{order.delivery_date}}</b></td>
+          <td>{{order.wholesalerProduct.wholesaler.name}}</td>
+          <td>{{order.wholesalerProduct.deal_price}}</td>
+          <td><span class="assign-button" (click)="assignWholesaler(order.id, order.product_id)">Assign</span></td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div id="table-mod-pick">
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Product</th>
+          <th>Pack Size</th>
+          <th>Quantity</th>
+          <th>Delivery Date</th>
+          <th>Wholesaler</th>
+          <th>Old Deal</th>
+          <th>New Deal</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let order of modifiedRates; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{order.product.title}}</td>
+          <td>{{order.product.pack_size}}</td>
+          <td>{{order.required_quantity}}</td>
+          <td><b>{{order.delivery_date}}</b></td>
+          <td>{{order.wholesalerProduct.wholesaler.name}}</td>
+          <td>{{order.wholesalerProduct.previous_price}}</td>
+          <td>{{order.wholesalerProduct.deal_price}}</td>
+          <td class="icons">
+            <span class="fas fa-check-square tick" (click)="actOnRevisedRate(order.id, 'accept')"></span>
+            <span class="fas fa-times-circle cross" (click)="actOnRevisedRate(order.id, 'reject')"></span>
+          </td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

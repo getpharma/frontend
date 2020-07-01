@@ -1,0 +1,89 @@
+<app-dashboard></app-dashboard>
+<div id="content">
+  <h2>
+    <span class="heading inactive-heading" id="head-ret" (click)="underline('head-ret');">Retailers</span> |
+    <span class="heading inactive-heading" id="head-whole" (click)="underline('head-whole');">  Wholesalers</span>
+  </h2>
+  <div id="table-ret">
+    <div class="fixed">
+      <div class="add-button">
+        <mat-card class="card add" (click)="createRetailer()">
+          <mat-card-title>Add Retailer</mat-card-title>
+        </mat-card>
+      </div>
+      <h2>List Of Retailers</h2>
+    </div>
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile No</th>
+          <th>Address</th>
+          <th>Day</th>
+          <th>Delivery Charge</th>
+          <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-rows" *ngFor="let retailer of retailers; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{retailer.name}}</td>
+          <td>{{retailer.email}}</td>
+          <td>{{retailer.mobile_no}}</td>
+          <td style="max-width: 100px; overflow: auto">{{retailer.address}}</td>
+          <td>{{retailer.delivery_day}}</td>
+          <td>{{retailer.delivery_charge}}</td>
+          <td>
+            <span class="fas fa-edit" (click)="updateRetailer(retailer, i)"></span>
+            <span class="fas fa-trash" (click)="delete('user', retailer.id)"></span>
+          </td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div id="table-whole">
+    <div class="fixed">
+      <div class="add-button">
+        <mat-card class="card add" (click)="createWholesaler()">
+          <mat-card-title>Add Wholesaler</mat-card-title>
+        </mat-card>
+      </div>
+      <h2>List Of Wholesalers</h2>
+    </div>
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Store Name</th>
+          <th>Email</th>
+          <th>Mobile No</th>
+          <th>Address</th>
+          <th>State</th>
+          <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-rows" *ngFor="let retailer of wholesalers; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{retailer.name}}</td>
+          <td>{{retailer.store_name}}</td>
+          <td>{{retailer.email}}</td>
+          <td>{{retailer.mobile_no}}</td>
+          <td style="max-width: 100px; overflow: auto">{{retailer.address}}</td>
+          <td>{{retailer.state}}</td>
+          <td>
+            <span class="fas fa-edit" (click)="updateWholesaler(retailer, i)"></span>
+            <span class="fas fa-trash" (click)="delete('wholesaler', retailer.id)"></span>
+          </td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

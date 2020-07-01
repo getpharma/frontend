@@ -1,0 +1,85 @@
+<div id="form">
+  <mat-card style="width: 50vh; text-align: center; padding: 30px">
+    <form [formGroup]="form" (ngSubmit)="updateProduct()">
+      <mat-form-field>
+        <label for="title">
+          <input matInput type="text" class="form-control" id="title" placeholder="Title - {{product.title}}" formControlName="title">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="manufacturer">
+          <input matInput type="text" class="form-control" id="manufacturer" placeholder="Manufacturer - {{product.manufacturer}}"
+                 formControlName="manufacturer">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="pack_size">
+          <input matInput type="text" class="form-control" id="pack_size" placeholder="Pack Size - {{product.pack_size}}"
+                 formControlName="pack_size">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="composition">
+          <input matInput type="text" class="form-control" id="composition" placeholder="Composition - {{product.composition}}"
+                 formControlName="composition">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category_id">
+          <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="mrp">
+          <input matInput type="text" class="form-control" id="mrp" placeholder="MRP - {{product.mrp}}"
+                 formControlName="mrp">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="off_percentage">
+          <input matInput type="text" class="form-control" id="off_percentage" placeholder="Off Percentage - {{product.off_percentage}}"
+                 formControlName="off_percentage">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="off_amount">
+          <input matInput type="text" class="form-control" id="off_amount" placeholder="Off Amount - {{product.off_amount}}"
+                 formControlName="off_amount">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="selling_price">
+          <input matInput type="text" class="form-control" id="selling_price" placeholder="Selling Price - {{product.selling_price}}"
+                 formControlName="selling_price">
+        </label>
+      </mat-form-field>
+      <br>
+      <div>
+        <mat-radio-group aria-label="is_trending" [(ngModel)]="trendingBool" [ngModelOptions]="{standalone: true}">
+          <p>Is it Trending Product ?</p>
+          <label>
+            <input type="radio" [value]="true" formControlName="is_trending">
+          </label>True
+          <label>
+            <input type="radio" [value]="false" formControlName="is_trending">
+          </label>False
+        </mat-radio-group>
+      </div>
+      <br>
+      <!--      <div class="form-group">-->
+      <input style="padding: 10px;" type="file" id="image" (change)="onFileChange($event)"><br>
+      <!--      </div>-->
+      <button mat-raised-button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Submit <i
+          class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,375 @@
+#content {
+    /*width: 1250px;*/
+    /*float: right;*/
+    margin-left: 250px;
+    background-size: cover;
+    height: 100%;
+    transition: 0.5s;
+    /*position: relative;*/
+    overflow: hidden;
+}
+
+.categories {
+    display: block;
+}
+
+.heading {
+    display: inline-block;
+    padding: 10px;
+}
+
+.heading:hover {
+    cursor: pointer;
+    background-color: #2f323a;
+    color: #00BFFF;
+}
+
+.active-heading {
+    background-color: #2f323a;
+    color: #00BFFF;
+}
+
+.card {
+    margin: 10px;
+    padding: 20px;
+    border: 2px solid lightgray;
+    background-color: lightgray;
+    display: inline-block;
+}
+
+.add {
+    box-shadow: 3px 6px #333333;
+}
+
+.add:hover {
+    cursor: pointer;
+
+}
+
+.search {
+    display: inline-block;
+    margin-left: 500px;
+    width: 300px;
+}
+
+input {
+    width: 400px !important;
+}
+.card:hover {
+    box-shadow: none;
+}
+
+mat-card-content {
+    text-align: center;
+}
+
+mat-card-actions .mat-button {
+    margin-left: 8px;
+}
+
+.single {
+    text-align: center;
+    /*width: 100%;*/
+    /*justify-content: space-between;*/
+
+}
+
+h2 {
+    padding: 10px;
+    color: #333333;
+}
+
+button {
+    background-color: white;
+    color: #333333;
+}
+
+button:hover {
+    background-color: #19B3D3;
+    color: white;
+}
+
+.single {
+    color: white;
+    background: #2f323a;
+    border-radius: 10px;
+}
+
+.subCategories {
+    display: none;
+}
+
+.products {
+    display: none;
+}
+
+.fixed {
+    /*width: 100%;*/
+    /*background-color: white;*/
+    position: sticky;
+    /*z-index: 10;*/
+    /*height: 250px;*/
+    top: 0;
+}
+
+.existing {
+    /*position: absolute;*/
+    height: 400px;
+    /*margin-top: 300px;*/
+    overflow-y: scroll;
+}
+
+.navigation {
+    padding: 10px;
+    font-weight: lighter;
+}
+
+.shift:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.current {
+    font-weight: bold;
+}
+
+/*CSS For Search BAr*/
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 50%;
+}
+
+
+/*CSS For Switch*/
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(13px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 17px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+/*CSS for Table*/
+.table-wrapper {
+    display: inline-block;
+    width: 90%;
+    /*margin: 10px 70px 0 20px;*/
+    box-shadow: 10px 50px 50px rgba(0, 0, 0, 0.2);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    overflow-x: hidden;
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    /*max-width: 100%;*/
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 10px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+.fa-edit {
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.fa-edit:hover {
+    cursor: pointer;
+    color: #00BFFF;
+}
+
+.fa-trash {
+    font-size: 25px;
+}
+
+.fa-trash:hover {
+    font-weight: bold;
+    cursor: pointer;
+    color: darkred;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+    }
+
+    .table-wrapper:before {
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 10px;
+    }
+
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+
+    .fl-table thead th:last-child {
+        border-bottom: none;
+    }
+
+    .fl-table thead {
+        float: left;
+    }
+
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+
+    .fl-table tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
+
+.assign-button {
+    padding: 7px;
+    background-color: indianred;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.assign-button:hover {
+    background-color: red;
+    cursor: pointer;
+}

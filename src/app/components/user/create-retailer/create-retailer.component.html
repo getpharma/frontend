@@ -1,0 +1,78 @@
+<div id="form">
+  <mat-card style="width: 50vh; text-align: center; padding: 30px">
+    <form [formGroup]="form" (ngSubmit)="createStock()">
+      <mat-form-field>
+        <label for="name">
+          <input matInput type="text" class="form-control" id="name" placeholder="* Name"
+                 formControlName="name">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="email">
+          <input matInput type="text" class="form-control" id="email" placeholder="* Email"
+                 formControlName="email">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="mobile_no">
+          <input matInput type="text" class="form-control" id="mobile_no" placeholder="* Mobile No"
+                 formControlName="mobile_no">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="alternate_no">
+          <input matInput type="text" class="form-control" id="alternate_no" placeholder="Alternate No"
+                 formControlName="alternate_no">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="password">
+          <input matInput type="text" class="form-control" id="password" placeholder="* Password"
+                 formControlName="password">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="address">
+          <input matInput type="text" class="form-control" id="address" placeholder="* Address"
+                 formControlName="address">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="state">
+          <input matInput type="text" class="form-control" id="state" placeholder="State"
+                 formControlName="state">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="pincode">
+          <input matInput type="text" class="form-control" id="pincode" placeholder="Pincode"
+                 formControlName="pincode">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="delivery_charge">
+          <input matInput type="text" class="form-control" id="delivery_charge" placeholder="* Delivery Charge"
+                 formControlName="delivery_charge">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-label>* Delivery Day</mat-label>
+        <mat-select formControlName="delivery_day">
+          <mat-option *ngFor="let category of weekDays" value="{{category}}">{{category}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Submit <i
+          class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    </form>
+  </mat-card>
+</div>

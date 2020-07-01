@@ -1,0 +1,11 @@
+<div class="list">
+  <div> Choose A Employee <br>
+    <mat-radio-group aria-label="Select a Packager" [(ngModel)]="packagerId">
+      <div class="mat-card" *ngFor="let employee of packagers">
+        <mat-radio-button [value]="employee.id">{{employee.name}}- {{employee.mobile_no}}</mat-radio-button>
+      </div>
+    </mat-radio-group>
+  </div>
+  <button mat-raised-button (click)="close()">Close</button>
+  <button mat-raised-button (click)="assign()">Select</button>
+</div>

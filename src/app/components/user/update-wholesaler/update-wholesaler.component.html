@@ -1,0 +1,82 @@
+<div id="form">
+  <mat-card style="width: 50vh; text-align: center; padding: 30px">
+    <form [formGroup]="form" (ngSubmit)="updateWholesaler()">
+      <mat-form-field>
+        <label for="name">
+          <input matInput type="text" class="form-control" id="name" placeholder="Name - {{wholesaler.name}}"
+                 formControlName="name">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="store_name">
+          <input matInput type="text" class="form-control" id="store_name"
+                 placeholder="Store Name - {{wholesaler.store_name}}"
+                 formControlName="store_name">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="email">
+          <input matInput type="text" class="form-control" id="email" placeholder="Email - {{wholesaler.email}}"
+                 formControlName="email">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="mobile_no">
+          <input matInput type="text" class="form-control" id="mobile_no"
+                 placeholder="Mobile No - {{wholesaler.mobile_no}}"
+                 formControlName="mobile_no">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="alternate_no">
+          <input matInput type="text" class="form-control" id="alternate_no"
+                 placeholder="Alternate No - {{wholesaler.alternate_no}}"
+                 formControlName="alternate_no">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="password">
+          <input matInput type="text" class="form-control" id="password" placeholder="Password"
+                 formControlName="password">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="address">
+          <input matInput type="text" class="form-control" id="address" placeholder="Address - {{wholesaler.address}}"
+                 formControlName="address">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="landmark">
+          <input matInput type="text" class="form-control" id="landmark"
+                 placeholder="Landmark - {{wholesaler.landmark}}"
+                 formControlName="landmark">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="state">
+          <input matInput type="text" class="form-control" id="state" placeholder="State - {{wholesaler.state}}"
+                 formControlName="state">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <label for="pincode">
+          <input matInput type="text" class="form-control" id="pincode" placeholder="Pincode - {{wholesaler.pincode}}"
+                 formControlName="pincode">
+        </label>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Submit <i
+          class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+    </form>
+  </mat-card>
+</div>

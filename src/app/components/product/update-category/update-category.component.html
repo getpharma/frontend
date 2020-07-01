@@ -1,0 +1,21 @@
+<!--
+Author: Subhanshu Chaddha
+Contact: subhanshu.chaddha2@gmail.com
+College: AKGEC, Ghaziabad
+-->
+
+<div>
+  <mat-card style="width: 40vh; text-align: center; padding: 30px">
+    <form>
+      <mat-form-field>
+        <label>
+          <input matInput type="name" class="inp" [formControl]="controls.title" placeholder="{{category.title}}" required/>
+        </label>
+      </mat-form-field>
+      <br>
+      <input style="padding: 10px;" type="file" id="image" (change)="onFileChange($event)"><br>
+      <button mat-raised-button (click)="updateCategory()"> Submit</button>
+      <button mat-raised-button (click)="close()"> Close</button>
+    </form>
+  </mat-card>
+</div>

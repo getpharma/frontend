@@ -3,6 +3,7 @@ import {DaysEnum} from '../enums/days.enum';
 export interface User {
   id: number;
   name?: string;
+  store_name?: string;
   email?: string;
   mobile_no: string;
   alternate_no?: string;

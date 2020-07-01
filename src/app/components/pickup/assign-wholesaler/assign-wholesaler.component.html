@@ -1,0 +1,12 @@
+<div class="list">
+  <div> Choose A Wholesaler <br>
+    <mat-radio-group aria-label="Select a Wholesaler" [(ngModel)]="wholesalerProductId">
+      <div class="mat-card" *ngFor="let employee of wholesalerProducts">
+        <mat-radio-button [value]="employee.id">{{employee.wholesaler.name}} ({{employee.wholesaler.store_name}})-
+          Rs{{employee.deal_price}}</mat-radio-button>
+      </div>
+    </mat-radio-group>
+  </div>
+  <button mat-raised-button (click)="close()">Close</button>
+  <button mat-raised-button (click)="assign()">Select</button>
+</div>

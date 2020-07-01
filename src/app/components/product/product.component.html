@@ -1,0 +1,253 @@
+<!--
+Author: Subhanshu Chaddha
+Contact: subhanshu.chaddha2@gmail.com
+College: AKGEC, Ghaziabad
+-->
+<app-dashboard></app-dashboard>
+<div id="content">
+  <h2>
+    <span class="heading inactive-heading" id="head-cat" (click)="underline('head-cat');">Categories</span> |
+    <span class="heading inactive-heading" id="head-prod" (click)="underline('head-prod');">  Products</span> |
+    <span class="heading inactive-heading" id="head-stock" (click)="underline('head-stock');">  Stock</span> |
+    <span class="heading inactive-heading" id="head-inv" (click)="underline('head-inv');">  Inventory</span>
+  </h2>
+  <div class="categories" id="table-cat">
+    <div class="fixed">
+      <div class="add-button">
+        <mat-card class="card add" (click)="createCategory()">
+          <mat-card-title>Add Category</mat-card-title>
+        </mat-card>
+      </div>
+
+      <h2>List Of Categories</h2>
+    </div>
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Title</th>
+          <th>Image</th>
+          <th>Operations</th>
+          <th>Active</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let category of categories; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{category.title}}</td>
+          <td><img style="height: 40px; width: 40px" src="{{category.image_url}}" alt="{{category.title}}"></td>
+          <td>
+            <span class="fas fa-edit" (click)="updateCategory(category)"></span>
+            <span class="fas fa-trash" (click)="delete('productCategory', category.id)"></span>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" checked *ngIf="category.is_active; else isNotActive"
+                     (click)="changeActiveness('category', category.id, category.is_active)">
+              <ng-template #isNotActive>
+                <label>
+                  <input type="checkbox" (click)="changeActiveness('category', category.id, category.is_active)">
+                </label>
+              </ng-template>
+              <span class="slider round"></span>
+            </label>
+
+          </td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div class="products" id="table-prod">
+    <div class="fixed">
+      <div class="add-button">
+        <mat-card class="card add" (click)="createProduct()">
+          <mat-card-title>Add Product</mat-card-title>
+        </mat-card>
+        <div class="search" [formGroup]="form">
+          <label>
+            <input type="text" placeholder="Search Product" formControlName="query" (focusout)="underline('head-prod')">
+          </label>
+        </div>
+      </div>
+      <h2>List Of Products</h2>
+    </div>
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Image</th>
+          <th>Title</th>
+          <th>MFG</th>
+          <th>Composition</th>
+          <th>Pack Size</th>
+          <th>Category</th>
+          <th>MRP</th>
+          <th>Selling Price</th>
+          <th>Deals</th>
+          <th>Operations</th>
+          <th>Active</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let product of products; let i = index">
+          <td>{{i + 1}}</td>
+          <td><img style="height: 40px; width: 40px" src="{{product.image_url}}" alt="{{product.title}}"></td>
+          <td>{{product.title}}</td>
+          <td style="max-width: 100px; overflow: hidden">{{product.manufacturer}}</td>
+          <td style="max-width: 100px; overflow: auto">{{product.composition}}</td>
+          <td>{{product.pack_size}}</td>
+          <td>{{product.category.title}}</td>
+          <td>{{product.mrp}}</td>
+          <td>{{product.selling_price}}</td>
+          <td><a class="assign-button" (click)="viewWPByProduct(product.id)">Click Me</a></td>
+          <td>
+            <span class="fas fa-edit" (click)="updateProduct(product, i)"></span>
+            <span class="fas fa-trash" (click)="delete('product', product.id)"></span>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" checked *ngIf="product.is_active; else isNotActive"
+                     (click)="changeActiveness('product', product.id, product.is_active)">
+              <ng-template #isNotActive>
+                <label>
+                  <input type="checkbox" (click)="changeActiveness('product', product.id, product.is_active, i)">
+                </label>
+              </ng-template>
+              <span class="slider round"></span>
+            </label>
+
+          </td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div class="deals" id="table-deal">
+    <div class="fixed">
+      <div class="add-button">
+        <mat-card class="card add" (click)="createWP(currentProduct)">
+          <mat-card-title>Add Deal Rate</mat-card-title>
+        </mat-card>
+      </div>
+      <h2>List Of Wholesaler Rates of <span
+          style="background-color: #00BFFF; padding: 4px; border: 2px solid black; border-radius: 20px; ">{{currentProductTitle}}</span>
+        by {{currentProductManufacturer}}</h2>
+    </div>
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Wholesaler</th>
+          <th>Store</th>
+          <th>MFG</th>
+          <th>MRP</th>
+          <th>Deal Price</th>
+          <th>Selling Price</th>
+          <th>Operations</th>
+          <th>Assigned</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-rows" *ngFor="let product of wholesalerProducts; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{product.wholesaler.name}}</td>
+          <td>{{product.wholesaler.store_name}}</td>
+          <td>{{product.product.manufacturer}}</td>
+          <td>{{product.mrp}}</td>
+          <td>{{product.deal_price}}</td>
+          <td>{{product.product.selling_price}}</td>
+          <td>
+            <span class="fas fa-edit" (click)="updateWP(product)"></span>
+            <span class="fas fa-trash" (click)="delete('wholesaler-product', product.id)"></span>
+          </td>
+          <td>
+            <label class="switch">
+              <input type="checkbox" checked *ngIf="product.is_assigned; else isNotActive"
+                     (click)="changeActiveness('wp', product.id, product.is_assigned)">
+              <ng-template #isNotActive>
+                <label>
+                  <input type="checkbox" (click)="changeActiveness('wp', product.id, product.is_assigned, i)">
+                </label>
+              </ng-template>
+              <span class="slider round"></span>
+            </label>
+
+          </td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div class="stocks" id="table-stock">
+    <div class="fixed">
+      <div class="add-button">
+        <mat-card class="card add" (click)="createStock()">
+          <mat-card-title>Add Stock</mat-card-title>
+        </mat-card>
+      </div>
+      <h2>List Of Current Stock</h2>
+    </div>
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>MFG</th>
+          <th>MRP</th>
+          <th>Selling Price</th>
+          <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-rows" *ngFor="let product of stocks; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{product.product.title}}</td>
+          <td>{{product.no_of_units}}</td>
+          <td>{{product.product.manufacturer}}</td>
+          <td>{{product.product.mrp}}</td>
+          <td>{{product.product.selling_price}}</td>
+          <td>
+            <span class="fas fa-edit" (click)="updateStock(product)"></span>
+            <span class="fas fa-trash" (click)="delete('stock', product.id)"></span>
+          </td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div class="inv" id="table-inv">
+    <h2>List Of Current Inventory</h2>
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>MFG</th>
+          <th>MRP</th>
+          <th>Selling Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-rows" *ngFor="let product of inventory; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{product.product.title}}</td>
+          <td>{{product.no_of_units}}</td>
+          <td>{{product.product.manufacturer}}</td>
+          <td>{{product.product.mrp}}</td>
+          <td>{{product.product.selling_price}}</td>
+        </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+</div>

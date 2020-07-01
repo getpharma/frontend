@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { consoleTestResultHandler } from 'tslint/lib/test';
 
 @Injectable()
 export class ApiService {
@@ -21,7 +22,7 @@ export class ApiService {
 
   get<T>(url: string, data?: any): Observable<T> {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', ApiService.getToken());
+    headers     = headers.set('Authorization', ApiService.getToken());
     return this.http.get<T>(this.baseUrl + url, {params: data, headers});
   }
 
@@ -31,18 +32,22 @@ export class ApiService {
     if (token) {
       headers = headers.set('Authorization', token);
     }
+    if (data) {
+      Object.keys(data).forEach((key) => (data[key] == null) && delete data[key]);
+    }
     return this.http.post<T>(this.baseUrl + url, data, {headers});
   }
 
   put<T>(url: string, data?: any): Observable<T> {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', ApiService.getToken());
-    return this.http.put<T>(this.baseUrl + url, data, {params: data, headers});
+    headers     = headers.set('Authorization', ApiService.getToken());
+    Object.keys(data).forEach((key) => (data[key] == null) && delete data[key]);
+    return this.http.put<T>(this.baseUrl + url, data, {headers});
   }
 
   delete<T>(url: string): Observable<any> {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', ApiService.getToken());
+    headers     = headers.set('Authorization', ApiService.getToken());
     return this.http.delete<T>(this.baseUrl + url, {headers});
   }
 

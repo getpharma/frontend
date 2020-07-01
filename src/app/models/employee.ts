@@ -11,5 +11,4 @@ export interface Employee {
   driver_license?: string;
   address: string;
   pincode: string;
-  created_by: number;
 }
