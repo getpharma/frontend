@@ -19,7 +19,7 @@
       <th class="day inactive-day" id="friday" (click)="selectDay(orderType, 'friday')">Friday</th>
       <th class="day inactive-day" id="saturday" (click)="selectDay(orderType, 'saturday')">Saturday</th>
       <th class="day inactive-day" id="sunday" (click)="selectDay(orderType, 'sunday')">Sunday</th>
-      <div *ngIf="orderType === 'unass'" class="assign-button top" (click)="assignWholesalerByDay(currentDay)">
+      <div *ngIf="orderType === 'unass-pick'" class="assign-button top" (click)="assignWholesalerByDay(currentDay)">
         Assign {{currentDay}} Pickups
       </div>
 
@@ -69,6 +69,7 @@
           <th>Wholesaler</th>
           <th>Deal Rate</th>
           <th>Total Amount</th>
+          <th>Re-Assign</th>
         </tr>
         </thead>
         <tbody>
@@ -83,6 +84,7 @@
           <td>{{order.wholesalerProduct.wholesaler.name}}</td>
           <td>{{order.wholesalerProduct.deal_price}}</td>
           <td>{{order.amount}}</td>
+          <td><a class="assign-button" (click)="assignWholesaler(order.id, order.product_id)">Assign</a></td>
         </tr>
         <tbody>
       </table>
@@ -109,7 +111,7 @@
             <th>Product</th>
             <th>Required Quantity</th>
             <th>Deal Rate</th>
-            <th>Total Amount</th>
+            <th>Amount</th>
           </tr>
           </thead>
           <tbody>

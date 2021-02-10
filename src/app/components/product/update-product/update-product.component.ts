@@ -20,6 +20,7 @@ export class UpdateProductComponent implements OnInit {
     manufacturer  : new FormControl(),
     pack_size     : new FormControl(),
     composition   : new FormControl(),
+    description   : new FormControl(this.data.product.description),
     category_id   : new FormControl(),
     mrp           : new FormControl(),
     off_percentage: new FormControl(),
@@ -73,6 +74,9 @@ export class UpdateProductComponent implements OnInit {
     }
     if (this.form.value.composition) {
       input.append('composition', this.form.get('composition').value);
+    }
+    if (this.form.value.description) {
+      input.append('description', this.form.get('description').value);
     }
     if (this.form.value.category_id) {
       input.append('category_id', this.form.get('category_id').value);

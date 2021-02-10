@@ -16,6 +16,7 @@ export interface Product {
   pack_size: string;
   image_url?: string;
   composition?: string;
+  description?: string;
   category_id?: number;
   mrp: string;
   off_percentage?: number;
@@ -37,6 +38,7 @@ export interface WholesalerProduct {
   previous_price: number;
   deal_price: number;
   composition: string;
+  description?: string;
   is_assigned: boolean;
   wholesaler: Wholesaler;
   product: Product;
@@ -54,4 +56,10 @@ export interface Inventory {
   product_id: number;
   no_of_units: number;
   product: Product;
+}
+
+export interface Sale {
+  product_id: number;
+  quantity: number;
+  product: Product | null;
 }

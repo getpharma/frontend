@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Inventory, Product, ProductCategory, Stock, WholesalerProduct } from '../../models/product';
+import { Inventory, Product, ProductCategory, Sale, Stock, WholesalerProduct } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
@@ -27,12 +27,19 @@ export class ProductComponent implements OnInit {
   products: Product[]                     = [];
   stocks: Stock[]                         = [];
   inventory: Inventory[]                  = [];
+  sale: Sale[]                            = [];
   categories: ProductCategory[]           = [];
   wholesalerProducts: WholesalerProduct[] = [];
-  headings                                = ['head-cat', 'head-prod', 'head-stock', 'head-inv'];
+  headings                                = ['head-cat', 'head-prod', 'head-stock', 'head-inv', 'head-sale'];
   currentProduct: Product                 = null;
   currentProductTitle                     = null;
   currentProductManufacturer              = null;
+
+  limit        = 100;
+  offset       = 0;
+  productCount = 0;
+  totalPages   = 1;
+  currentPage  = 1;
 
   controls = {
     query: new FormControl(),
@@ -57,7 +64,7 @@ export class ProductComponent implements OnInit {
   }
 
   underline(element: string) {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       if (this.headings[i] !== element) {
         document.getElementById(this.headings[i]).classList.replace('active-heading', 'inactive-heading');
       } else {
@@ -74,8 +81,16 @@ export class ProductComponent implements OnInit {
       document.getElementById('table-deal').style.display  = 'none';
       document.getElementById('table-stock').style.display = 'none';
       document.getElementById('table-inv').style.display   = 'none';
+      document.getElementById('table-sale').style.display  = 'none';
     } else if (element === 'head-prod') {
-      this.productService.viewProducts()
+      this.productService.countProducts()
+        .subscribe(res => {
+          this.productCount = res.count;
+          console.log(res);
+          console.log(this.productCount);
+          this.totalPages = Math.ceil(this.productCount / this.limit);
+        });
+      this.productService.viewProducts(this.limit, this.offset)
         .subscribe(res => {
           this.products = res;
         });
@@ -84,6 +99,7 @@ export class ProductComponent implements OnInit {
       document.getElementById('table-deal').style.display  = 'none';
       document.getElementById('table-stock').style.display = 'none';
       document.getElementById('table-inv').style.display   = 'none';
+      document.getElementById('table-sale').style.display  = 'none';
     } else if (element === 'head-stock') {
       this.productService.viewStocks()
         .subscribe(res => {
@@ -94,6 +110,7 @@ export class ProductComponent implements OnInit {
       document.getElementById('table-deal').style.display  = 'none';
       document.getElementById('table-stock').style.display = 'block';
       document.getElementById('table-inv').style.display   = 'none';
+      document.getElementById('table-sale').style.display  = 'none';
     } else if (element === 'head-inv') {
       this.productService.viewInventory()
         .subscribe(res => {
@@ -104,6 +121,62 @@ export class ProductComponent implements OnInit {
       document.getElementById('table-deal').style.display  = 'none';
       document.getElementById('table-stock').style.display = 'none';
       document.getElementById('table-inv').style.display   = 'block';
+      document.getElementById('table-sale').style.display  = 'none';
+    } else if (element === 'head-sale') {
+      this.productService.productCount()
+        .subscribe(res => {
+          this.sale = res;
+          console.log(res);
+        });
+      document.getElementById('table-cat').style.display   = 'none';
+      document.getElementById('table-prod').style.display  = 'none';
+      document.getElementById('table-deal').style.display  = 'none';
+      document.getElementById('table-stock').style.display = 'none';
+      document.getElementById('table-inv').style.display   = 'none';
+      document.getElementById('table-sale').style.display  = 'block';
+    }
+  }
+
+  nextPage() {
+    if ((this.currentPage + 1) !== this.totalPages) {
+      if (this.currentPage === this.totalPages) {
+        document.getElementById('next').style.color = 'grey';
+      }else {
+        document.getElementById('next').style.color = '#00BFFF';
+      }
+      document.getElementById('previous').style.color = '#00BFFF';
+      this.offset = this.currentPage * this.limit;
+      this.currentPage += 1;
+      this.productService.viewProducts(this.limit, this.offset)
+        .subscribe(res => {
+          this.products = res;
+          console.log(this.offset);
+          console.log(this.limit);
+        });
+    } else {
+      document.getElementById('next').style.color = 'grey';
+    }
+  }
+
+  previousPage() {
+    if ((this.currentPage - 1) === 0) {
+      document.getElementById('previous').style.color = 'grey';
+    } else {
+      this.currentPage -= 1;
+      console.log(this.currentPage);
+      if (this.currentPage === 1) {
+        document.getElementById('previous').style.color = 'grey';
+      } else {
+        document.getElementById('previous').style.color = '#00BFFF';
+      }
+      document.getElementById('next').style.color = '#00BFFF';
+      this.offset = (this.currentPage - 1) * this.limit;
+      this.productService.viewProducts(this.limit, this.offset)
+        .subscribe(res => {
+          this.products = res;
+          console.log(this.offset);
+          console.log(this.limit);
+        });
     }
   }
 
@@ -139,7 +212,7 @@ export class ProductComponent implements OnInit {
           }));
     } else {
       dialogRef.afterClosed().subscribe(() =>
-        this.productService.viewProducts()
+        this.productService.viewProducts(this.limit, this.offset)
           .subscribe(res => {
             this.products = res;
           }));
@@ -212,7 +285,7 @@ export class ProductComponent implements OnInit {
   createProduct() {
     const dialogRef = this.dialog.open(CreateProductComponent);
     dialogRef.afterClosed().subscribe(() =>
-      this.productService.viewProducts()
+      this.productService.viewProducts(this.limit, this.offset)
         .subscribe(res => {
           this.products = res;
         })

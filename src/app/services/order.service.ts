@@ -36,4 +36,9 @@ export class OrderService {
   assignEmployeesToOrder(id: number, data: any): Observable<Order> {
     return this.api.put<any>('/assign-employees/' + id, data).pipe(map(res => res.data));
   }
+
+  cancelOrder(id: number): Observable<History> {
+    console.log(id);
+    return this.api.put<any>('/cancel-order/' + id);
+  }
 }

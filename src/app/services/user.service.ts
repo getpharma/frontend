@@ -22,5 +22,13 @@ export class UserService {
     return this.api.put<any>('/user/' + id, data).pipe(map(res => res.data));
   }
 
+  viewDeletedRetailers(): Observable<User[]> {
+    return this.api.get<any>('/deleted-users').pipe(map(res => res.data));
+  }
+
+  restoreRetailer(retailerId: number) {
+    return this.api.put<any>('/restore-retailer/' + retailerId).pipe(map(res => res.data));
+  }
+
 
 }

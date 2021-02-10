@@ -10,6 +10,8 @@ import { CreateRetailerComponent } from './create-retailer/create-retailer.compo
 import { UpdateRetailerComponent } from './update-retailer/update-retailer.component';
 import { CreateWholesalerComponent } from './create-wholesaler/create-wholesaler.component';
 import { UpdateWholesalerComponent } from './update-wholesaler/update-wholesaler.component';
+import { DeletedRetailerComponent } from './deleted-retailers/deleted-retailer.component';
+import { DeletedWholesalerComponent } from './deleted-wholesalers/deleted-wholesaler.component';
 
 @Component({
   selector   : 'app-user',
@@ -78,6 +80,17 @@ export class UserComponent implements OnInit {
   }
 
 
+  viewDeletedRetailer() {
+    const dialogRef = this.dialog.open(DeletedRetailerComponent);
+    dialogRef.afterClosed().subscribe(() =>
+      this.userService.viewRetailers()
+        .subscribe(res => {
+          this.retailers = res;
+        })
+    );
+  }
+
+
   createRetailer() {
     const dialogRef = this.dialog.open(CreateRetailerComponent);
     dialogRef.afterClosed().subscribe(() =>
@@ -97,6 +110,16 @@ export class UserComponent implements OnInit {
         this.retailers[index] = res;
       }
     });
+  }
+
+  viewDeletedWholesalers() {
+    const dialogRef = this.dialog.open(DeletedWholesalerComponent);
+    dialogRef.afterClosed().subscribe(() =>
+      this.wholesalerService.viewWholesalers()
+        .subscribe(res => {
+          this.wholesalers = res;
+        })
+    );
   }
 
   createWholesaler() {

@@ -9,7 +9,8 @@ College: AKGEC, Ghaziabad
     <span class="heading inactive-heading" id="head-cat" (click)="underline('head-cat');">Categories</span> |
     <span class="heading inactive-heading" id="head-prod" (click)="underline('head-prod');">  Products</span> |
     <span class="heading inactive-heading" id="head-stock" (click)="underline('head-stock');">  Stock</span> |
-    <span class="heading inactive-heading" id="head-inv" (click)="underline('head-inv');">  Inventory</span>
+    <span class="heading inactive-heading" id="head-inv" (click)="underline('head-inv');">  Inventory</span> |
+    <span class="heading inactive-heading" id="head-sale" (click)="underline('head-sale');">  Sale</span>
   </h2>
   <div class="categories" id="table-cat">
     <div class="fixed">
@@ -72,7 +73,15 @@ College: AKGEC, Ghaziabad
           </label>
         </div>
       </div>
-      <h2>List Of Products</h2>
+      <div style="display: inline-flex; width: 100%; justify-content: space-around">
+        <h2 id="previous" (click)="previousPage()">
+          <span class="fas fa-angle-left">  Previous</span>
+        </h2>
+        <h2>List Of Products</h2>
+        <h2 id="next" (click)="nextPage()">
+          Next  <span class="fas fa-angle-right"></span>
+        </h2>
+      </div>
     </div>
     <div class="table-wrapper existing">
       <table class="fl-table">
@@ -83,6 +92,7 @@ College: AKGEC, Ghaziabad
           <th>Title</th>
           <th>MFG</th>
           <th>Composition</th>
+          <th>About the Product</th>
           <th>Pack Size</th>
           <th>Category</th>
           <th>MRP</th>
@@ -97,11 +107,12 @@ College: AKGEC, Ghaziabad
         <tr class="table-rows" *ngFor="let product of products; let i = index">
           <td>{{i + 1}}</td>
           <td><img style="height: 40px; width: 40px" src="{{product.image_url}}" alt="{{product.title}}"></td>
-          <td>{{product.title}}</td>
+          <td style="max-width: 200px; overflow: auto">{{product.title}}</td>
           <td style="max-width: 100px; overflow: hidden">{{product.manufacturer}}</td>
           <td style="max-width: 100px; overflow: auto">{{product.composition}}</td>
-          <td>{{product.pack_size}}</td>
-          <td>{{product.category.title}}</td>
+          <td style="max-width: 150px; overflow: auto">{{product.description ? product.description : "-"}}</td>
+          <td style="max-width: 150px; overflow: auto">{{product.pack_size}}</td>
+          <td style="max-width: 100px; overflow: auto">{{product.category.title}}</td>
           <td>{{product.mrp}}</td>
           <td>{{product.selling_price}}</td>
           <td><a class="assign-button" (click)="viewWPByProduct(product.id)">Click Me</a></td>
@@ -126,6 +137,7 @@ College: AKGEC, Ghaziabad
         <tbody>
       </table>
     </div>
+    <div style="text-align: center;width: 100%">Page {{currentPage}} of {{totalPages}}</div>
   </div>
   <div class="deals" id="table-deal">
     <div class="fixed">
@@ -246,6 +258,36 @@ College: AKGEC, Ghaziabad
           <td>{{product.product.mrp}}</td>
           <td>{{product.product.selling_price}}</td>
         </tr>
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <div id="table-sale" class="sale">
+    <div class="table-wrapper existing">
+      <table class="fl-table">
+        <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Image</th>
+          <th>Title</th>
+          <th>MFG</th>
+          <th>MRP</th>
+          <th>Selling Price</th>
+          <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="table-rows" *ngFor="let product of sale; let i = index">
+          <td>{{i + 1}}</td>
+          <td><img *ngIf="product.product" style="height: 40px; width: 40px" src="{{product.product.image_url}}"
+                   alt="{{product.product.title}}"></td>
+          <td><span *ngIf="product.product">{{product.product.title}}</span></td>
+          <td style="max-width: 100px; overflow: hidden"><span
+              *ngIf="product.product">{{product.product.manufacturer}}</span></td>
+          <td><span *ngIf="product.product">{{product.product.mrp}}</span></td>
+          <td><span *ngIf="product.product">{{product.product.selling_price}}</span></td>
+          <td><b>{{product.quantity}}</b></td>
         <tbody>
       </table>
     </div>

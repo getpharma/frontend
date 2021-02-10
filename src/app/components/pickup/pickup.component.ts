@@ -197,6 +197,10 @@ export class PickupComponent implements OnInit {
             });
         }
       });
+    } else if (this.orderType === 'pend-pick') {
+      dialogRef.afterClosed().subscribe(() => {
+        this.selectDay('pend-pick', this.currentDay);
+      });
     } else {
       dialogRef.afterClosed().subscribe(() => {
         const day = this.currentDay;

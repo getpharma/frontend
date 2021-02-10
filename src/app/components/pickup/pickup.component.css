@@ -228,7 +228,7 @@ input[type=text]:focus {
     box-shadow: 10px 50px 50px rgba(0, 0, 0, 0.2);
     margin-left: 50%;
     transform: translateX(-50%);
-    overflow-x: hidden;
+    overflow-x: scroll;
 }
 
 .fl-table {
@@ -410,26 +410,41 @@ input[type=text]:focus {
     margin: 10px;
     /*display: table-cell;*/
 }
+
 .icons {
     display: flex;
     justify-content: space-around;
 }
+
 .tick {
     color: green;
     font-size: 30px;
 }
+
 .tick:hover {
     color: lawngreen;
     cursor: pointer;
 }
+
 .cross {
     color: darkred;
     font-size: 30px;
 }
+
 .cross:hover {
     color: red;
     cursor: pointer;
 }
+
 .top {
     margin-left: 200px;
+}
+
+#reassign {
+    color: blue;
+}
+
+#reassign:hover {
+    color: red;
+    cursor: pointer;
 }

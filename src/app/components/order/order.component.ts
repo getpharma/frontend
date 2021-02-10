@@ -5,6 +5,9 @@ import { History } from '../../models/history';
 import { MatDialog } from '@angular/material/dialog';
 import { AssignEmployeesComponent } from './assign-employees/assign-employees.component';
 import { OrderStatus } from '../../enums/order-status.enum';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { CancelConfirmationDialogComponent } from './cancel-confirmation-dialog/cancel-confirmation-dialog.component';
+import { ListProductsComponent } from './list-products/list-products.component';
 
 @Component({
   selector   : 'app-order',
@@ -41,13 +44,13 @@ export class OrderComponent implements OnInit {
       }
     }
     if (element === 'head-unass-ord') {
-      this.orderType = 'unass-ord';
+      this.orderType                                           = 'unass-ord';
       document.getElementById('table-pack-ord').style.display  = 'none';
       document.getElementById('table-unass-ord').style.display = 'block';
       document.getElementById('table-pend-ord').style.display  = 'none';
       document.getElementById('table-comp-ord').style.display  = 'none';
-      document.getElementById('days').style.display        = 'block';
-      document.getElementById('filter').style.display      = 'none';
+      document.getElementById('days').style.display            = 'block';
+      document.getElementById('filter').style.display          = 'none';
       this.selectDay('unass-ord', 'all');
 
     } else if (element === 'head-pend-ord') {
@@ -57,8 +60,8 @@ export class OrderComponent implements OnInit {
       document.getElementById('table-pend-ord').style.display  = 'block';
       document.getElementById('table-pack-ord').style.display  = 'none';
       document.getElementById('table-comp-ord').style.display  = 'none';
-      document.getElementById('days').style.display        = 'block';
-      document.getElementById('filter').style.display      = 'none';
+      document.getElementById('days').style.display            = 'block';
+      document.getElementById('filter').style.display          = 'none';
     } else if (element === 'head-pack-ord') {
       this.orderType = 'pack-ord';
       this.selectDay('pack-ord', 'all');
@@ -66,8 +69,8 @@ export class OrderComponent implements OnInit {
       document.getElementById('table-pend-ord').style.display  = 'none';
       document.getElementById('table-pack-ord').style.display  = 'block';
       document.getElementById('table-comp-ord').style.display  = 'none';
-      document.getElementById('days').style.display        = 'block';
-      document.getElementById('filter').style.display      = 'none';
+      document.getElementById('days').style.display            = 'block';
+      document.getElementById('filter').style.display          = 'none';
     } else if (element === 'head-comp-ord') {
       this.orderType = 'comp-ord';
       this.historyFilter('today');
@@ -75,8 +78,8 @@ export class OrderComponent implements OnInit {
       document.getElementById('table-pend-ord').style.display  = 'none';
       document.getElementById('table-pack-ord').style.display  = 'none';
       document.getElementById('table-comp-ord').style.display  = 'block';
-      document.getElementById('days').style.display        = 'none';
-      document.getElementById('filter').style.display      = 'block';
+      document.getElementById('days').style.display            = 'none';
+      document.getElementById('filter').style.display          = 'block';
     }
   }
 
@@ -171,6 +174,33 @@ export class OrderComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(res => {
       this.underline('head-unass-ord');
+    });
+  }
+
+  cancel(id: number) {
+    const dialogRef = this.dialog.open(CancelConfirmationDialogComponent, {
+      data: {id}
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (this.orderType === 'unass-ord') {
+        this.underline('head-unass-ord');
+      } else if (this.orderType === 'pend-ord') {
+        this.underline('head-pend-ord');
+      } else if (this.orderType === 'pack-ord') {
+        this.underline('head-pack-ord');
+      }
+    });
+  }
+
+  viewInvoice(order: Order) {
+    const dialogRef = this.dialog.open(InvoiceComponent, {
+      data: {order}
+    });
+  }
+
+  viewProducts(order: Order) {
+    const dialogRef = this.dialog.open(ListProductsComponent, {
+      data: {order}
     });
   }
 

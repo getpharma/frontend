@@ -29,6 +29,13 @@
       </mat-form-field>
       <br>
       <mat-form-field>
+        <label for="description">
+          <textarea matInput type="text" class="form-control" id="description" placeholder="About the Product"
+                    formControlName="description"></textarea>
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
         <mat-label>Category</mat-label>
         <mat-select formControlName="category_id">
           <mat-option *ngFor="let category of categories" value="{{category.id}}">{{category.title}}</mat-option>

@@ -1,7 +1,8 @@
 <app-dashboard></app-dashboard>
 <div id="content">
   <h2>
-    <span class="heading inactive-heading" id="head-unass-ord" (click)="underline('head-unass-ord');">Unassigned</span> |
+    <span class="heading inactive-heading" id="head-unass-ord" (click)="underline('head-unass-ord');">Unassigned</span>
+    |
     <span class="heading inactive-heading" id="head-pend-ord" (click)="underline('head-pend-ord');">  Pending</span> |
     <span class="heading inactive-heading" id="head-pack-ord" (click)="underline('head-pack-ord');">  Packed</span> |
     <span class="heading inactive-heading" id="head-comp-ord" (click)="underline('head-comp-ord');">  Completed</span>
@@ -40,6 +41,7 @@
           <th>Amount</th>
           <th>Delivery Date</th>
           <th>Employees</th>
+          <th>Cancel</th>
         </tr>
         </thead>
         <tbody>
@@ -49,10 +51,11 @@
           <td>{{order.user.name}}</td>
           <td>{{order.user.store_name}}</td>
           <td style="max-width: 100px; overflow: auto">{{order.delivery_address}}</td>
-          <td>{{order.products.length}}</td>
+          <td style="cursor: pointer; color: #125699" (click)="viewProducts(order)">{{order.products.length}}</td>
           <td>{{order.amount}}</td>
           <td>{{order.expected_date}}</td>
           <td><a id="assign-button" (click)="assign(order.id)">Assign</a></td>
+          <td><a class="assign-button" (click)="cancel(order.id)">Cancel</a></td>
         </tr>
         <tbody>
       </table>
@@ -72,6 +75,7 @@
           <th>Delivery Date</th>
           <th>Packager</th>
           <th>Delivery Man</th>
+          <th>Cancel</th>
         </tr>
         </thead>
         <tbody>
@@ -88,6 +92,7 @@
           <ng-template #packager>{{order.packager_id}}</ng-template>
           <td *ngIf="order.delivery_man_id; else delivery_man">{{order.delivery_man.name}}</td>
           <ng-template #delivery_man>{{order.delivery_man_id}}</ng-template>
+          <td><a class="assign-button" (click)="cancel(order.id)">Cancel</a></td>
 
         </tr>
         <tbody>
@@ -106,6 +111,8 @@
           <th>Delivery Date</th>
           <th>Packager</th>
           <th>Delivery Man</th>
+          <th>Invoice</th>
+          <th>Cancel</th>
         </tr>
         </thead>
         <tbody>
@@ -120,6 +127,8 @@
           <ng-template #packager>{{order.packager_id}}</ng-template>
           <td *ngIf="order.delivery_man_id; else delivery_man">{{order.delivery_man.name}}</td>
           <ng-template #delivery_man>{{order.delivery_man_id}}</ng-template>
+          <td><a class="assign-button" (click)="viewInvoice(order)">Invoice</a></td>
+          <td><a class="assign-button" (click)="cancel(order.id)">Cancel</a></td>
         </tr>
         <tbody>
       </table>
@@ -151,7 +160,9 @@
           <td>{{order.packager}}</td>
           <td>{{order.delivery_man}}</td>
           <td *ngIf="order.order_status === 'delivered'; else redBg"><a id="delivered">{{order.order_status}}</a></td>
-          <ng-template #redBg><td><a id="undelivered">{{order.order_status}}</a></td></ng-template>
+          <ng-template #redBg>
+            <td><a id="undelivered">{{order.order_status}}</a></td>
+          </ng-template>
         </tr>
         <tbody>
       </table>

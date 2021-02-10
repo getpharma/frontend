@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { Inventory, Product, ProductCategory, Stock, WholesalerProduct } from '../models/product';
+import { Inventory, Product, ProductCategory, Sale, Stock, WholesalerProduct } from '../models/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -22,8 +22,12 @@ export class ProductService {
     return this.api.put<any>('/productCategory/' + id, data).pipe(map(res => res.data));
   }
 
-  viewProducts(): Observable<Product[]> {
-    return this.api.get<any>('/products-for-admin').pipe(map(res => res.data));
+  viewProducts(limit: number, offset: number): Observable<Product[]> {
+    return this.api.get<any>('/products-for-admin?limit=' + limit + '&offset=' + offset).pipe(map(res => res.data));
+  }
+
+  countProducts(): Observable<any> {
+    return this.api.get<any>('/count-products').pipe(map(res => res.data));
   }
 
   searchProducts(query: string): Observable<Product[]> {
@@ -77,6 +81,10 @@ export class ProductService {
 
   viewInventory(): Observable<Inventory[]> {
     return this.api.get<any>('/inventory').pipe(map(res => res.data));
+  }
+
+  productCount(): Observable<Sale[]> {
+    return this.api.get<any>('/product-count').pipe(map(res => res.data));
   }
 
 }

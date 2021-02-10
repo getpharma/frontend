@@ -1,0 +1,33 @@
+<div id="inv-pack-ord">
+  <div class="table-wrapper existing">
+    <div class="top-head">
+      <div class="sub-heading">
+        <span>Order Id: {{pickup.order_id}}</span><span> | </span>
+        <span>Retailer: {{pickup.user.name}} ({{pickup.user.store_name}})</span><span> | </span>
+        <span>Total Amount: {{pickup.amount}}</span><span> | </span>
+        <span>Delivery Man: {{pickup.delivery_man.name}}</span>
+      </div>
+    </div>
+    <table class="fl-table">
+      <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Product</th>
+        <th>Required Quantity</th>
+        <th>Deal Rate</th>
+        <th>Amount</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr class="table-rows" *ngFor="let order of pickup.completed_products; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{order.title}}</td>
+        <td>{{order.no_of_units}}</td>
+        <td>{{order.rate}}</td>
+        <td>{{order.no_of_units * order.rate}}</td>
+      </tr>
+      <tbody>
+    </table>
+  </div>
+</div>

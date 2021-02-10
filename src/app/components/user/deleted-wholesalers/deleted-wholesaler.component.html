@@ -1,0 +1,27 @@
+<div id="inv-pack-ord">
+  <div class="table-wrapper existing">
+    <table class="fl-table">
+      <thead>
+      <tr>
+        <th>S.No.</th>
+        <th>Name</th>
+        <th>Store Name</th>
+        <th>Email</th>
+        <th>Mobile No</th>
+        <th>Restore</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr class="table-rows" *ngFor="let order of users; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{order.name}}</td>
+        <td>{{order.store_name}}</td>
+        <td>{{order.email}}</td>
+        <td>{{order.mobile_no}}</td>
+        <td><a class="assign-button" (click)="restore(order.id)">Restore</a></td>
+      </tr>
+      <tbody>
+    </table>
+  </div>
+</div>

@@ -21,6 +21,7 @@ export interface Order {
   payment_status: PaymentStatus;
   order_status: OrderStatus;
   pending_products: CompactProduct[];
+  completed_products: CompactProduct[];
   expected_date?: Date;
   user?: User;
   packager?: Employee;

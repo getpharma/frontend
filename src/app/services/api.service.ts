@@ -41,7 +41,9 @@ export class ApiService {
   put<T>(url: string, data?: any): Observable<T> {
     let headers = new HttpHeaders();
     headers     = headers.set('Authorization', ApiService.getToken());
-    Object.keys(data).forEach((key) => (data[key] == null) && delete data[key]);
+    if (data) {
+      Object.keys(data).forEach((key) => (data[key] == null) && delete data[key]);
+    }
     return this.http.put<T>(this.baseUrl + url, data, {headers});
   }
 

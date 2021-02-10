@@ -17,6 +17,7 @@ export class CreateProductComponent implements OnInit {
     manufacturer  : new FormControl('', [Validators.required]),
     pack_size     : new FormControl('', [Validators.required]),
     composition   : new FormControl(''),
+    description   : new FormControl(''),
     category_id   : new FormControl('', [Validators.required]),
     mrp           : new FormControl('', [Validators.required]),
     off_percentage: new FormControl(''),
@@ -63,6 +64,9 @@ export class CreateProductComponent implements OnInit {
     input.append('category_id', this.form.get('category_id').value);
     if (this.form.value.composition) {
       input.append('composition', this.form.get('composition').value);
+    }
+    if (this.form.value.description) {
+      input.append('description', this.form.get('description').value);
     }
     input.append('mrp', this.form.get('mrp').value);
     if (this.form.value.off_percentage) {

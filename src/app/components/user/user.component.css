@@ -46,6 +46,21 @@
     display: inline-block;
 }
 
+.del {
+    float: right;
+    padding: 10px;
+    margin-right: 100px;
+    margin-top: 20px;
+    background-color: lightgrey;
+    border-radius: 3px;
+    display: inline-block;
+}
+.del:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
+
 .card:hover {
     box-shadow: none;
 }

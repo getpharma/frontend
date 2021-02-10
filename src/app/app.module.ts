@@ -49,12 +49,18 @@ import { OrderService } from './services/order.service';
 import { AssignEmployeesComponent } from './components/order/assign-employees/assign-employees.component';
 import { PickupComponent } from './components/pickup/pickup.component';
 import { PickupService } from './services/pickup.service';
+// tslint:disable-next-line:max-line-length
 import { ModRateConfirmationDialogComponent } from './components/pickup/mod-rate-confirmation-dialog/mod-rate-confirmation-dialog.component';
 import { AssignWholesalerComponent } from './components/pickup/assign-wholesaler/assign-wholesaler.component';
 import { WholesalerConfirmationDialogComponent } from './components/pickup/wholesaler-confirmation-dialog/wholesaler-confirmation-dialog.component';
 import { AssignPackagerComponent } from './components/pickup/assign-packager/assign-packager.component';
 import { CreateStockComponent } from './components/product/create-stock/create-stock.component';
 import { UpdateStockComponent } from './components/product/update-stock/update-stock.component';
+import { InvoiceComponent } from './components/order/invoice/invoice.component';
+import { CancelConfirmationDialogComponent } from './components/order/cancel-confirmation-dialog/cancel-confirmation-dialog.component';
+import { DeletedRetailerComponent } from './components/user/deleted-retailers/deleted-retailer.component';
+import { DeletedWholesalerComponent } from './components/user/deleted-wholesalers/deleted-wholesaler.component';
+import { ListProductsComponent } from './components/order/list-products/list-products.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +91,12 @@ import { UpdateStockComponent } from './components/product/update-stock/update-s
     WholesalerConfirmationDialogComponent,
     AssignPackagerComponent,
     CreateStockComponent,
-    UpdateStockComponent
+    UpdateStockComponent,
+    InvoiceComponent,
+    CancelConfirmationDialogComponent,
+    DeletedRetailerComponent,
+    DeletedWholesalerComponent,
+    ListProductsComponent
   ],
   imports     : [
     BrowserModule,
@@ -107,7 +118,7 @@ import { UpdateStockComponent } from './components/product/update-stock/update-s
     LayoutModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule,
+    MatListModule
   ],
   providers   : [
     ApiService,

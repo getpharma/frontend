@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { Wholesaler } from '../models/wholesaler';
 import { map } from 'rxjs/operators';
+import { User } from '../models/user';
 
 @Injectable()
 export class WholesalerService {
@@ -23,4 +24,14 @@ export class WholesalerService {
   updateWholesaler(id: number, data: any): Observable<Wholesaler> {
     return this.api.put<any>('/wholesaler/' + id, data).pipe(map(res => res.data));
   }
+
+
+  viewDeletedWholesalers(): Observable<Wholesaler[]> {
+    return this.api.get<any>('/deleted-wholesalers').pipe(map(res => res.data));
+  }
+
+  restoreWholesaler(retailerId: number) {
+    return this.api.put<any>('/restore-wholesaler/' + retailerId).pipe(map(res => res.data));
+  }
+
 }
